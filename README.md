@@ -2,12 +2,23 @@
 
 Offline desktop app for turning notes into flashcards and reviewing them with spaced repetition.
 
-```bash
-pip install -r requirements.txt
-python -m flashcard_app
+Download and run it from Windows PowerShell. [Python 3.11+](https://www.python.org/downloads/windows/) needs to be installed first; on the installer, enable **Add python.exe to PATH**.
+
+```powershell
+git clone https://github.com/AndrewFCode/flash_card_app.git
+Set-Location flash_card_app
+py -m pip install -r requirements.txt
+py -m flashcard_app
 ```
 
-Cards, decks, and review history live in `~/.flashcard_app/flashcards.db`. Set `FLASHCARD_DATA_DIR` to store that folder somewhere else. The app keeps the ten newest database backups in the `backups` folder and writes a new one at most once a day (and whenever you choose **Back up now**).
+Cards, decks, and review history live in `$env:USERPROFILE\.flashcard_app\flashcards.db`. To store that folder somewhere else:
+
+```powershell
+$env:FLASHCARD_DATA_DIR = "$env:USERPROFILE\Documents\Flashcards"
+py -m flashcard_app
+```
+
+The app keeps the ten newest database backups in the `backups` folder and writes a new one at most once a day (and whenever you choose **Back up now**).
 
 ## What it does
 
@@ -24,15 +35,18 @@ Everything stays on this computer. There is no account and no network call.
 
 ## Tests
 
-```bash
-pip install -r requirements-dev.txt
-python -m pytest
+From PowerShell, in the project folder:
+
+```powershell
+py -m pip install -r requirements-dev.txt
+py -m pytest
 ```
 
 ## Desktop build
 
-PyInstaller can package a local executable:
+PyInstaller can package a local executable. From PowerShell, in the project folder:
 
-```bash
-pyinstaller --name Flashcards --windowed -m flashcard_app
+```powershell
+py -m pip install pyinstaller
+py -m PyInstaller --name Flashcards --windowed -m flashcard_app
 ```
