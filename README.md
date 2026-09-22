@@ -5,11 +5,13 @@ Offline desktop app for turning notes into flashcards and reviewing them with sp
 Download and run it from Windows PowerShell. [Python 3.11+](https://www.python.org/downloads/windows/) needs to be installed first; on the installer, enable **Add python.exe to PATH**.
 
 ```powershell
-git clone https://github.com/AndrewFCode/flash_card_app.git
+cmd /c "git clone https://github.com/AndrewFCode/flash_card_app.git"
 Set-Location flash_card_app
 py -m pip install -r requirements.txt
 py -m flashcard_app
 ```
+
+Clone through `cmd /c` so PowerShell does not abort when git writes progress to stderr. If a plain `git clone` still prints red "Cloning into" text, that is git progress, not a failed download.
 
 Cards, decks, and review history live in `$env:USERPROFILE\.flashcard_app\flashcards.db`. To store that folder somewhere else:
 
